@@ -1,33 +1,15 @@
-console.log("Destructuring Arrays")
+import { heroes } from "./data/heroes"
+console.log(heroes)
 
-const characters = ["Goku", "Vegeta", "Trunks"]
-
-console.log(characters[0])
-console.log(characters[1])
-console.log(characters[2])
-
-const [kakaroto, sayayin, superSayayin] = characters
-
-console.log(kakaroto, sayayin, superSayayin)
-
-const retunrArray = () => {
-  return ["ABC", 123]
+const getHeroById = id => {
+  return heroes.find(hero => hero.id === id)
 }
 
-const [letters, numbers] = retunrArray()
-console.log(letters, numbers)
+console.log(getHeroById(2))
 
-// Homework
-
-const useState = value => {
-  return [
-    value,
-    () => {
-      console.log("Hello World")
-    }
-  ]
+const getHeroesByOwner = owner => {
+  return heroes.filter(heroes => heroes.owner === owner)
 }
 
-const [name, setName] = useState("Goku")
-console.log(name)
-setName()
+console.log(getHeroesByOwner("DC"))
+console.log(getHeroesByOwner("Marvel"))
