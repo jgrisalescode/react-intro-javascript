@@ -26,6 +26,9 @@ const heroes = [
   }
 ]
 
+const owners = ["DC", "Marvel"]
+
 module.exports = {
-  heroes
+  heroes,
+  owners
 }
