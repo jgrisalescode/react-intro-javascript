@@ -1,43 +1,13 @@
-import { heroes, getHeroeById } from "./data/heroes"
-
-const promise = new Promise((resolve, reject) => {
-  setTimeout(() => {
-    const heroe = getHeroeById(5)
-    if (heroe) {
-      console.log("3 seconds later ...")
-      resolve(heroe)
-    } else {
-      reject(new Error("Heroe not found"))
-    }
-  }, 3000)
-})
-
-promise
-  .then(heroe => {
-    console.table(heroe)
+// https://developers.giphy.com/dashboard/
+const apiKey = "nZ82xzf9w70zG26q8IHBafOoiIx6OC2k"
+// Using FetchAPI
+const request = fetch(`http://api.giphy.com/v1/gifs/random?api_key=${apiKey}`)
+request
+  .then(resp => resp.json())
+  .then(({ data }) => {
+    console.log(data.images.original.url)
+    const img = document.createElement("img")
+    img.src = data.images.original.url
+    document.body.append(img)
   })
-  .catch(err => {
-    console.warn(err)
-  })
-
-const getHeroeByIdAsync = id => {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      const heroe = getHeroeById(id)
-      if (heroe) {
-        console.log("2 seconds later ...")
-        resolve(heroe)
-      } else {
-        reject(new Error("Heroe not found"))
-      }
-    }, 2000)
-  })
-}
-
-getHeroeByIdAsync(4)
-  .then(heroe => {
-    console.table(heroe)
-  })
-  .catch(err => {
-    console.warn(err)
-  })
+  .catch(console.warn)
